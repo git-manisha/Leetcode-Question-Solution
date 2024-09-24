@@ -24,6 +24,9 @@ public:
                 j--;
             }
         }
+        if(st[0] == "0"){
+            return "0";
+        }
         string result ="";
         for(int i=0;i<st.size();i++){
             result +=st[i];
