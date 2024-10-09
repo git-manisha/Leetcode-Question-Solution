@@ -11,29 +11,15 @@
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) {
-        stack<ListNode*> st;
-        ListNode* temp = head;
-        while(temp){
-            st.push(temp);
-            temp = temp->next;
+        if(head == NULL || head->next == NULL){
+            return head;
         }
-        temp = st.top();
-        st.pop();
-        int maxNode = temp->val;
-        ListNode* result = new ListNode(temp->val);
-        while(!st.empty()){
-           temp = st.top();
-           st.pop();
-           if(temp->val < maxNode){
-            continue;
-           }
-           else{
-                ListNode* curr = new ListNode(temp->val);
-                curr->next = result;
-                result = curr;
-                maxNode = curr->val;
-           }
+        ListNode* nextNode = removeNodes(head->next);
+        if(head->val < nextNode->val){
+            delete head;
+            return nextNode;
         }
-        return result;
+        head->next = nextNode;
+        return head;
     }
 };
