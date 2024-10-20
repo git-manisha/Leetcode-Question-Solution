@@ -11,22 +11,17 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        if(head == NULL || head->next == NULL){
-            return head;
+        vector<int> v;
+        ListNode* temp = head;
+        while(temp){
+            v.push_back(temp->val);
+            temp =temp->next;
         }
-        ListNode* prev = head;
-        while(prev){
-            ListNode* second;
-            if(prev->next != NULL){
-                second = prev->next;
-            }
-            while(second){
-                if(prev->val > second->val){
-                    swap(prev->val,second->val);
-                }
-                second = second->next;
-            }
-            prev = prev->next;
+        sort(v.begin(),v.end());
+        ListNode* p = head;
+        for(int i=0;i<v.size();i++){
+            p->val = v[i];
+            p = p->next;
         }
         return head;
     }
