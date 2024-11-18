@@ -4,12 +4,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        hset = set()
-        for x in nums:
-            if x in hset:
+        list1 = set()
+        for i in nums:
+            if i in list1:
                 return True
             else:
-                hset.add(x)
-        
+                list1.add(i)
         return False
         
