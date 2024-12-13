@@ -5,26 +5,23 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        if(len(s) != len(t)):
-            return False
-        my_list = [0]*26
-        i=0
-        l = len(s)
-        while(i<l):
-            it = ord(s[i])-ord('a')
-            my_list[it] = my_list[it]+1
-            i = i+1
-        i=0
-        length_t = len(t)
-        while(i<length_t):
-            it = ord(t[i])-ord('a')
-            my_list[it] = my_list[it]-1
-            i = i+1
+        dit = dict()
+        for i in s:
+            if i not in dit:
+                dit[i] = 1
+            else:
+                dit[i] = dit[i]+1
         
-        for i in range(26):
-            if(my_list[i] != 0):
+        for i in t:
+            if i in dit:
+                dit[i] = dit[i]-1
+            else:
                 return False
-
-        return True
         
+        for i in dit:
+            if dit[i]>0 or dit[i]<0:
+                return False
+        
+        return True
+
         
