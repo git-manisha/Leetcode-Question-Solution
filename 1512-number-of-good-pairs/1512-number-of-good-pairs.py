@@ -4,16 +4,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        i=0
-        count = 0
-        while(i<len(nums)):
-            j = i+1
-            while(j<len(nums)):
-                if(nums[i] == nums[j]):
-                    count +=1
-                j +=1
-            i +=1
-        
-        return count
+        hashmap = {}
 
+        for i in nums:
+            if(i not in hashmap):
+                hashmap[i] = 1
+            else:
+                hashmap[i] +=1
         
+        count =0
+        for key,value in hashmap.items():
+            if(value >1):
+                count += (value*(value-1))/2
+            
+        return count
