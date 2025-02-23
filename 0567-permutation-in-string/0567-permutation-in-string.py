@@ -7,32 +7,19 @@ class Solution(object):
         """
         if(len(s1)>len(s2)):
             return False
-        arr = [0]*26
-        arr1 = [0]*26
-        i=0
-        while(i<len(s1)):
-            idx = ord(s1[i])-ord('a')
-            arr[idx] +=1
-            i +=1
 
-        n = len(s1)
-        i=0
-        j=0
-        while(j<len(s2)):
-            if((j-i+1)<n):
-                idx = ord(s2[j])-ord('a')
-                arr1[idx] +=1
-            else:
-                idx = ord(s2[j])-ord('a')
-                arr1[idx] +=1
-                if(arr ==arr1):
-                    return True
-                idx = ord(s2[i])-ord('a')
-                arr1[idx] -=1
-                i +=1
-            j +=1
+        s1_count = [0]*26
+        s2_count = [0]*26
+        for i in range(len(s1)):
+            s1_count[ord(s1[i])-ord('a')] +=1
+            s2_count[ord(s2[i])-ord('a')] +=1
         
-        return False
+        for i in range(len(s2)-len(s1)):
+            if(s1_count == s2_count):
+                return True
+            
+            s2_count[ord(s2[i])-ord('a')] -=1
+            s2_count[ord(s2[i+len(s1)])-ord('a')] +=1
         
-
-        
+        return s1_count==s2_count
+            
