@@ -1,16 +1,10 @@
 # Write your MySQL query statement below
-
-select name 
-from (
-select e1.name,e1.id,count(e2.managerId) as mng
-from Employee as e1
-join Employee as e2
-where e1.id =e2.managerId
-group by e1.id
-)t
-where mng>=5;
-
-
- 
-
-
+with cte as(
+    select managerId,count(managerID) as mng_count
+    from Employee
+    where managerId is not null
+    group by managerId
+)select e.name from cte as c
+join Employee as e 
+on c.managerId = e.id
+where mng_count>=5;
