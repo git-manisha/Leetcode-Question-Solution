@@ -5,18 +5,26 @@ class Solution(object):
         :rtype: bool
         """
         stack = []
-        i=0
-        while(i<len(s)):
-            if(stack):
-                if((s[i] == ')' and stack[len(stack)-1]=='(') or (s[i] == '}' and stack[len(stack)-1]=='{') or (s[i] == ']' and stack[len(stack)-1]=='[')):
+        for ch in s:
+            if(len(stack)==0 or ch=='(' or ch=='{' or ch=='['):
+                stack.append(ch)
+                continue
+            if(ch == ')'):
+                if(stack[len(stack)-1] =='('):
                     stack.pop()
                 else:
-                    stack.append(s[i])
-            else:
-                stack.append(s[i])
+                    return False
+            if(ch == '}'):
+                if(stack[len(stack)-1] =='{'):
+                    stack.pop()
+                else:
+                    return False
+            if(ch == ']'):
+                if(stack[len(stack)-1] =='['):
+                    stack.pop()
+                else:
+                    return False
 
-            i +=1
-        
         if(stack):
             return False
         return True
