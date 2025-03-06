@@ -4,28 +4,22 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        stack = []
-        for ch in s:
-            if(len(stack)==0 or ch=='(' or ch=='{' or ch=='['):
-                stack.append(ch)
-                continue
-            if(ch == ')'):
-                if(stack[len(stack)-1] =='('):
-                    stack.pop()
-                else:
-                    return False
-            if(ch == '}'):
-                if(stack[len(stack)-1] =='{'):
-                    stack.pop()
-                else:
-                    return False
-            if(ch == ']'):
-                if(stack[len(stack)-1] =='['):
-                    stack.pop()
-                else:
-                    return False
+        stack =[]
 
+        for ch in s:
+            if(ch == '('):
+                stack.append(')')
+            elif(ch == '{'):
+                stack.append('}')
+            elif(ch == '['):
+                stack.append(']')
+            elif(len(stack)==0 or stack[len(stack)-1] != ch):
+                return False
+            else:
+                stack.pop()
+            
         if(stack):
             return False
         return True
 
+        
