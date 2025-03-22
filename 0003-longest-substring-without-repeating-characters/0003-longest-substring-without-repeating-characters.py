@@ -4,27 +4,21 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        hashmap = {}
+        queue = []
         i = 0
-        j = 0
         result = 0
         substr = ""
         while(i<len(s)):
-            if(s[i] in hashmap):
-                hashmap[s[i]] = i
-                while(len(substr)!=0 and substr[j] != s[i]):
-                    substr = substr[1:]
-                if(len(substr) ==0):
-                    substr = ""
-                else:
-                    substr = substr[1:]
-                substr +=s[i]
+            if(s[i] in queue):
+                while(len(queue)!=0 and queue[0]!=s[i]):
+                    del queue[0]
+                del queue[0]
+                queue.append(s[i])
             else:
-                substr +=s[i]
-                hashmap[s[i]] = i
-            if(len(substr)>result):
-                result = len(substr)
-            i +=1
-        
+                queue.append(s[i])
+            if(len(queue)>result):
+                result = len(queue)
+            i +=1 
         return result
+
                    
