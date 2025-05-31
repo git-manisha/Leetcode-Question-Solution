@@ -4,18 +4,19 @@ class Solution(object):
         :type digits: List[int]
         :rtype: List[int]
         """
-        str1 = ""
-        for i in digits:
-            str1 +=str(i)
+        i = len(digits)-1
+
+        if(digits[i] <9):
+            digits[i] +=1
+        else:  
+            while(i>=0 and digits[i]==9):
+                digits[i]=0
+                i -=1
+            if(i == -1):
+                digits.insert(0,1)
+            else:
+                digits[i]+=1
+        return digits
+
         
-        num = int(str1)+1
-        str1 = str(num)
-        res = []
-        i=0
-        while(i<len(str1)):
-            res.append(int(str1[i]))
-            i +=1
-
-        return res
-
         
