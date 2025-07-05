@@ -5,19 +5,19 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        word_list = s.split()
-
+        str1 = ""
         result = ""
-        for i in word_list:
-            if(k!=0):
-                result += i +" "
-            else:
-
+        itr = 0
+        while(itr<len(s)):
+            if(s[itr]==" " and k!=0):
+                result += str1 +" "
+                str1 = ""
+                k -=1
+            elif(k==0):
                 return result[:-1]
-            k -=1
+            else:
+                str1 +=s[itr]
+            itr +=1
         
-        return result[:-1]
-        
-
-        
-        
+        return result+str1
+            
