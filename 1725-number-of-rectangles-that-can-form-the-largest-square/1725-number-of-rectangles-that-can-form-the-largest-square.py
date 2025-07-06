@@ -4,21 +4,16 @@ class Solution(object):
         :type rectangles: List[List[int]]
         :rtype: int
         """
-        hashmap = {}
-        i =0
-        while(i<len(rectangles)):
-            val = min(rectangles[i])
-            if(val not in hashmap):
-                hashmap[val] = 1
-            else:
-                hashmap[val] +=1
-            i +=1
+        itr = 0
+        while(itr<len(rectangles)):
+            rectangles[itr] = min(rectangles[itr])
+            itr +=1
         
-        maximum =0
-        result = 0
-        for key ,value in hashmap.items():
-            if(key>maximum):
-                maximum = key
-                result = value
+        maximum = max(rectangles)
+        count = 0
+        for i in rectangles:
+            if(i == maximum):
+                count +=1
         
-        return result
+
+        return count
