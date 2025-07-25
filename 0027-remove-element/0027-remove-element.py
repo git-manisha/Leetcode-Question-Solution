@@ -5,14 +5,21 @@ class Solution(object):
         :type val: int
         :rtype: int
         """
-        length = len(nums)
-        size = len(nums)
-        i =0
-        while(i<len(nums)):
-            if(nums[i]==val):
-                nums.remove(nums[i])
-                length = length-1
-            else:
-                i = i+1
+        k = len(nums)
 
-        return length
+        first = 0
+        last = len(nums)-1
+
+        while(first<=last):
+            if(nums[first]==val):
+                while(first<last and nums[last]==val):
+                    del nums[last]
+                    last -=1
+                nums[first], nums[last] = nums[last], nums[first]
+                del nums[last]
+                last -=1
+            first +=1
+        
+        return len(nums)
+            
+            
