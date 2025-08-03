@@ -5,20 +5,19 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        result = 0
         hashmap = {}
-        presum = 0
-        hashmap[presum] = 1
-        i=0
-        count = 0
+        hashmap[0] = 1
+        i = 0
+        preSum =0
         while(i<len(nums)):
-            presum +=nums[i]
-            temp = presum-k
-            if(temp in hashmap):
-                count +=hashmap[temp]
-            if(presum not in hashmap):
-                hashmap[presum] = 1
+            preSum +=nums[i]
+            if(preSum-k in hashmap):
+                result +=hashmap[preSum-k]
+            if(preSum not in hashmap):
+                hashmap[preSum] = 1
             else:
-                hashmap[presum] +=1
+                hashmap[preSum] += 1
             i +=1
-        return count
-
+        
+        return result
