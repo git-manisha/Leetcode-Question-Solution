@@ -4,29 +4,26 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        product=1
-        res = [0]*len(nums)
-        count =0
+        zeroCount = 0
+        multiple = 1
         for i in nums:
-            if(i==0):
-                count +=1
+            if i == 0:
+                zeroCount +=1
             else:
-                product = product*i
-            if(count ==2):
-                return res
+                multiple *=i
         
-        i=0
-        while(i<len(nums)):
-            if(nums[i] == 0):
-                res[i] = product
-                return res
-            else:
-                nums[i] = product/nums[i]
-            i +=1
+        newArr = [0]*len(nums)
+        if zeroCount==0:
+            i = 0
+            while(i<len(nums)):
+                newArr[i] = multiple//nums[i]
+                i +=1
+        elif zeroCount==1:
+            i = 0
+            while(i<len(nums)):
+                if nums[i]==0:
+                    newArr[i] = multiple
+                i +=1
         
-        return nums
-            
-        
+        return newArr
 
-        
-        
