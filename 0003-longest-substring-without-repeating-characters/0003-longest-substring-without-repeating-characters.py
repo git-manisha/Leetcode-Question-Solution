@@ -15,7 +15,7 @@ class Solution(object):
             if(s[last] in hashmap):
                 max_length = max(max_length,len(substring))
                 while(s[first] != s[last]):
-                    hashmap[s[first]] = 0
+                    del hashmap[s[first]]
                     substring = substring[1:]
                     first +=1
                 substring = substring[1:]
