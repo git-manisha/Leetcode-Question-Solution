@@ -4,21 +4,27 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        queue = []
-        i = 0
-        result = 0
-        substr = ""
-        while(i<len(s)):
-            if(s[i] in queue):
-                while(len(queue)!=0 and queue[0]!=s[i]):
-                    del queue[0]
-                del queue[0]
-                queue.append(s[i])
+        substring = ""
+        hashmap = {}
+        max_length = 0
+        if(len(s)==1):
+            return 1
+        first = 0
+        last = 0
+        while(last < len(s)):
+            if(s[last] in hashmap):
+                max_length = max(max_length,len(substring))
+                while(s[first] != s[last]):
+                    hashmap[s[first]] = 0
+                    substring = substring[1:]
+                    first +=1
+                substring = substring[1:]
+                first +=1
+                substring +=s[last]
             else:
-                queue.append(s[i])
-            if(len(queue)>result):
-                result = len(queue)
-            i +=1 
-        return result
-
-                   
+                substring +=s[last]
+                hashmap[s[last]] = 1
+            last +=1
+        max_length = max(max_length,len(substring))
+        return max_length
+            
