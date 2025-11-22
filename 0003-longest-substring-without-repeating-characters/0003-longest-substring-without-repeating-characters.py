@@ -7,8 +7,6 @@ class Solution(object):
         substring = ""
         hashmap = {}
         max_length = 0
-        if(len(s)==1):
-            return 1
         first = 0
         last = 0
         while(last < len(s)):
