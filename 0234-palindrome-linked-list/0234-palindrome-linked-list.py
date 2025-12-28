@@ -4,43 +4,30 @@
 #         self.val = val
 #         self.next = next
 class Solution(object):
-    def reverseLinkedlist(self,head):
-        p = head
-        q = None
-        r = None
-        while(p != None):
-            r = q
-            q = p
-            p = p.next
-            q.next = r
-        head = q
-        return head
-
     def isPalindrome(self, head):
         """
         :type head: Optional[ListNode]
         :rtype: bool
         """
-        if(head==None or head.next==None):
-            return True
         slow = head
         fast = head
-        prev = None
-        while(fast!=None and fast.next!=None):
-            prev = slow
+        p = None
+        q = None
+
+        while(fast != None and fast.next != None):
+            p = q
+            q = slow
             slow = slow.next
             fast = fast.next.next
-        prev.next = None
-        last = self.reverseLinkedlist(slow)
-        curr = head
-        while(curr!=None and last!=None):
-            if(curr.val != last.val):
+            q.next = p
+        
+        if(fast != None):
+            slow = slow.next
+        
+        while(q != None and slow != None):
+            if(q.val != slow.val):
                 return False
-            curr = curr.next
-            last = last.next
+            q = q.next
+            slow = slow.next
         
         return True
-
-
-
-        
