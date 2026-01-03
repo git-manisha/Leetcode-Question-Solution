@@ -10,23 +10,27 @@
  */
 class Solution {
 public:
+    ListNode* curr;
+    void solve(ListNode* head){
+        if(head == NULL){
+            return ;
+        }
+        solve(head->next);
+        ListNode* temp = curr->next;
+        if(curr->next == NULL){
+            return;
+        }
+        else if(curr == head){
+            head->next = NULL;
+            return;
+        }
+        curr->next = head;
+        head->next =(temp == head)?NULL:temp;
+        curr=temp;
+    }
     void reorderList(ListNode* head) {
-        stack<ListNode*> st;
-        ListNode* p = head;
-        while(p){
-            st.push(p);
-            p = p->next;
-        }
-        int size = st.size()/2;
-        ListNode* curr = head;
-        while(size>0){
-            ListNode* temp = curr->next;
-            curr->next = st.top();
-            st.top()->next = temp;
-            curr = temp;
-            st.pop();
-            size--;
-        }
-        curr->next = NULL;
+        curr = head;
+        solve(head);
+       
     }
 };
