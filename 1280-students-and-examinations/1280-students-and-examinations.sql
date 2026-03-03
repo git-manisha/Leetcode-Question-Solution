@@ -1,19 +1,26 @@
 # Write your MySQL query statement below
-
-with new_tbl as (
-select s.student_id , s.student_name, s1.subject_name
+/*select s.student_id,s.student_name,e.subject_name,count(*) as attended_exams
 from Students as s
-cross join Subjects as s1
-)
-select n.student_id,n.student_name,
-        n.subject_name,count(e.student_id) as attended_exams
-from new_tbl as n 
-left join Examinations as e
-on n.student_id=e.student_id
-    and n.subject_name = e.subject_name
-group by n.student_id,n.subject_name
-order by n.student_id,n.subject_name;
+left join 
+(
+select e.student_id,s.subject_name
+from Examinations as e
+inner join Subjects as s
+on e.subject_name = s.subject_name
+) as e
+on s.student_id = e.student_id
+group by 1,2,3
+*/
 
-
-
+select s.student_id,s.student_name,e.subject_name,count() as attended_exams
+from Examinations as e
+right join
+(
+select s.student_id,s.student_name,s2.subject_name
+from Students as s
+cross join Subjects as s2
+) as s
+on e.student_id = s.student_id
+and e.subject_name = s.subject_name
+group by s.student_id,s.subject_name
 
